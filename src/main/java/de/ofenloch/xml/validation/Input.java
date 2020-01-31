@@ -48,8 +48,8 @@ public class Input implements LSInput {
       try {
         byte[] input = new byte[inputStream.available()];
         inputStream.read(input);
-        String contents = new String(input);
-        return new String(contents.getBytes(encoding));
+        String contents = new String(input, encoding);
+        return contents;
       } catch (IOException e) {
         e.printStackTrace();
         System.out.println("Exception " + e);
