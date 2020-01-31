@@ -77,8 +77,9 @@ public class App {
                 trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, true);
 
                 Schema ooxmlSchema = factory.newSchema(new Source[] {
-                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/XMLSchema.xsd")),
                     new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/xml.xsd")),
+                    // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/XMLSchema.xsd")),
+                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/wml.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-audioVideo.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-baseStylesheet.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
@@ -165,7 +166,6 @@ public class App {
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
-                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
                 File xmlFile = new File("data/word_document.xml");
                 InputStream xmlInStream = new FileInputStream(xmlFile);
@@ -173,9 +173,13 @@ public class App {
                 validator.validate(new StreamSource(xmlInStream));
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
+                System.out.println("  line     : " + e.getLineNumber());
+                System.out.println("  column   : " + e.getColumnNumber());
+                System.out.println("  publicId : " + e.getPublicId());
+                System.out.println("  systemId : " + e.getSystemId());
                 System.out.println("  message : " + e.getMessage());
                 System.out.println("    cause : " + e.getCause());
-                e.printStackTrace();
+                //e.printStackTrace();
             } catch (SAXException e) {
                 System.out.println("Caught SAXException:");
                 System.out.println("  message : " + e.getMessage());
