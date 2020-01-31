@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsd:schema targetNamespace="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema" blockDefault="#all" elementFormDefault="qualified">
   <xsd:simpleType name="ST_VectorBaseType">
     <xsd:annotation>
