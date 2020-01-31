@@ -12,7 +12,7 @@ import javax.xml.validation.Validator;
 
 public class xmlvalidator {
 
-    static boolean validateAgainstXSD(final String xmlFileName, final String xsdFileName) {
+    static public boolean validateAgainstXSD(final String xmlFileName, final String xsdFileName) {
         try {
             InputStream xml = new FileInputStream(new File(xmlFileName));
             InputStream xsd = new FileInputStream(new File(xsdFileName));
@@ -24,7 +24,7 @@ public class xmlvalidator {
     } // static boolean validateAgainstXSD(final String xmlFileName, final String
       // xsdFileName)
 
-    static boolean validateAgainstXSD(InputStream xml, InputStream xsd) {
+    static public boolean validateAgainstXSD(InputStream xml, InputStream xsd) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = factory.newSchema(new StreamSource(xsd));
