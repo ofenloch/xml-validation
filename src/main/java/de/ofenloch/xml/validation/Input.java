@@ -13,6 +13,8 @@ public class Input implements LSInput {
 
   private String systemId;
 
+  private String encoding;
+
   public String getPublicId() {
     return publicId;
   }
@@ -47,7 +49,7 @@ public class Input implements LSInput {
         byte[] input = new byte[inputStream.available()];
         inputStream.read(input);
         String contents = new String(input);
-        return contents;
+        return new String(contents.getBytes(encoding));
       } catch (IOException e) {
         e.printStackTrace();
         System.out.println("Exception " + e);
@@ -69,6 +71,7 @@ public class Input implements LSInput {
   }
 
   public void setEncoding(String encoding) {
+    this.encoding = encoding;
   }
 
   public void setStringData(String stringData) {
@@ -93,6 +96,7 @@ public class Input implements LSInput {
   private BufferedInputStream inputStream;
 
   public Input(String publicId, String sysId, InputStream input) {
+    this.encoding = "utf-8";
     this.publicId = publicId;
     this.systemId = sysId;
     this.inputStream = new BufferedInputStream(input);
