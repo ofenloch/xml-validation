@@ -1,15 +1,17 @@
 package de.ofenloch.xml.validation;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
+import org.xml.sax.InputSource;
 
 public class ResourceResolver implements LSResourceResolver {
 
-  public static String DATA_DIRECTORY = "/home/ofenloch/workspaces/jee/xml-validation/data/";
-  public static String XSD_DIRECTORY = "/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/";
+  public static String DATA_DIRECTORY = "./data/";
+  public static String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema/";
 
   public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 
