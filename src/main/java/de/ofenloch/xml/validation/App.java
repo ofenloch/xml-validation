@@ -69,7 +69,7 @@ public class App {
             try {
 
                 SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                // factory.setResourceResolver(new ResourceResolver());
+                factory.setResourceResolver(new ResourceResolver());
                 // FEATURE_SECURE_PROCESSING disallows file access
                 // trySetFeature(factory, XMLConstants.FEATURE_SECURE_PROCESSING, true);
                 trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_SCHEMA, true);
@@ -77,6 +77,8 @@ public class App {
                 trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, true);
 
                 Schema ooxmlSchema = factory.newSchema(new Source[] {
+                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/XMLSchema.xsd")),
+                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/xml.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-audioVideo.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-baseStylesheet.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
@@ -121,7 +123,7 @@ public class App {
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/dml-wordprocessingDrawing.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-animationInfo.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-baseTypes.xsd")),
-                    // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/               xml-validation/data/OfficeOpenXML-XMLSchema/pml-comments.xsd")),
+                    // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-comments.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-embedding.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-presentationProperties.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/pml-presentation.xsd")),
@@ -136,7 +138,7 @@ public class App {
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-documentPropertiesCustom.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-documentPropertiesExtended.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-documentPropertiesVariantTypes.xsd")),
-                    new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
+                    // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/shared-relationshipReference.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/sml-autoFilter.xsd")),
                     // new StreamSource(new FileInputStream("/home/ofenloch/workspaces/jee/xml-validation/data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
