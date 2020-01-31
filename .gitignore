@@ -2,4 +2,4 @@ target/
 /.classpath
 /.project
 org.eclipse.*
- 
+*.xsd
