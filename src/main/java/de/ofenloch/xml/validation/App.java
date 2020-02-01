@@ -151,6 +151,7 @@ public class App {
                 File xmlFile = new File("./data/word_document.xml");
                 InputStream xmlInStream = new FileInputStream(xmlFile);
                 Validator validator = ooxmlSchema.newValidator();
+                validator.setErrorHandler(new validationErrorHandler());
                 validator.validate(new StreamSource(xmlInStream));
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
