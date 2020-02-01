@@ -86,3 +86,10 @@ ofenloch@teben:~/workspaces/java/xml-validation/.git$ cd ..
 ofenloch@teben:~/workspaces/java/xml-validation$ code .
 ofenloch@teben:~/workspaces/java/xml-validation$ 
 ```
+
+## Original README.md
+
+The basic concept of XML validation was taken from <https://github.com/Turreta/Validate-XML-against-an-XSD-that-imports-other-XSDs>
+
+His original README is in file 'README-TURETTA.md'.
+
