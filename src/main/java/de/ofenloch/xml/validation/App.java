@@ -128,7 +128,7 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-supplementaryWorkbooks.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-table.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-volatileDependencies.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-workbook.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-workbook.xsd")),
 
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
