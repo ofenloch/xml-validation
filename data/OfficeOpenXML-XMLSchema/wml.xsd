@@ -4,7 +4,7 @@
   <xsd:import id="m" namespace="http://schemas.openxmlformats.org/officeDocument/2006/math" schemaLocation="shared-math.xsd" />
   <xsd:import id="wp" namespace="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" schemaLocation="dml-wordprocessingDrawing.xsd" />
   <xsd:import id="rel" namespace="http://schemas.openxmlformats.org/officeDocument/2006/relationships" schemaLocation="shared-relationshipReference.xsd" />
-  <xsd:import id="xml" namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:import id="xml" namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/XML/1998/namespace" />
   <xsd:complexType name="CT_Empty"></xsd:complexType>
   <xsd:simpleType name="ST_OnOff">
     <xsd:annotation>
