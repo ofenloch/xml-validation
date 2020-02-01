@@ -4,6 +4,14 @@
 
 This is an example how you can validate an XML file against an XSD file in Java.
 
+## OOXML
+
+The xsd files in folder ./data/OfficeOpenXML-XMLSchema/ are used to 
+validate OOXML files. I took them from the Apache POI project ...
+
+Some of the xsd files from MicroSoft have to be converted to UTF-8. Otherwise 
+we get 'content in prolog' errors.
+
 ## Set Up Project with Maven
 
 ```bash
