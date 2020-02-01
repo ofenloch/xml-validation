@@ -100,7 +100,7 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesVariantTypes.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-relationshipReference.xsd")),
-                    
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-additionalCharacteristics.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-audioVideo.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseStylesheet.xsd")),
                     
@@ -153,7 +153,7 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-slide.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-userDefinedTags.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-viewProperties.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-additionalCharacteristics.xsd")),
+                    
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-autoFilter.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-calculationChain.xsd")),
