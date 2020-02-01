@@ -176,8 +176,8 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-main.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-officeDrawing.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
                 File xmlFile = new File("data/word_document.xml");
