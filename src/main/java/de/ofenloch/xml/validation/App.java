@@ -53,10 +53,10 @@ public class App {
                     // xml.xsd refers/loads XMLSchema.dtd and datatypes.dtd
                     // datatypes.dtd is intended only for incorporation in XMLSchema.dtd
                     // So we do not load XMLSchema.xsd
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-documentProperties.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObject.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-baseTypes.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-bibliography.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlDataProperties.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlSchemaProperties.xsd")),
@@ -65,6 +65,9 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesVariantTypes.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-relationshipReference.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-additionalCharacteristics.xsd")),
+
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-documentProperties.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObject.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-audioVideo.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseStylesheet.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-diagramColorTransform.xsd")),
@@ -97,7 +100,7 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-textParagraph.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-textRun.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-text.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-baseTypes.xsd")),
+                    
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-comments.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-embedding.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-presentationProperties.xsd")),
@@ -107,7 +110,7 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-userDefinedTags.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-viewProperties.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-autoFilter.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
+                    
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-calculationChain.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-comments.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-customXmlMappings.xsd")),
@@ -126,6 +129,7 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-table.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-volatileDependencies.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-workbook.xsd")),
+
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
