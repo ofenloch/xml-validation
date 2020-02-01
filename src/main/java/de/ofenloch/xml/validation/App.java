@@ -53,7 +53,7 @@ public class App {
                     // xml.xsd refers/loads XMLSchema.dtd and datatypes.dtd
                     // datatypes.dtd is intended only for incorporation in XMLSchema.dtd
                     // So we do not load XMLSchema.xsd
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-baseTypes.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
