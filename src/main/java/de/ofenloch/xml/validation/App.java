@@ -162,6 +162,7 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
+
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-lockedCanvas.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-picture.xsd")),
