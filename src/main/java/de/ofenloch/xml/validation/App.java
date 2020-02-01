@@ -147,7 +147,8 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-compatibility.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
-                File xmlFile = new File("data/word_document.xml");
+                System.out.println("\nCreated ooxmlSchema. Going to validate ./data/word_document.xml ...\n");
+                File xmlFile = new File("./data/word_document.xml");
                 InputStream xmlInStream = new FileInputStream(xmlFile);
                 Validator validator = ooxmlSchema.newValidator();
                 validator.validate(new StreamSource(xmlInStream));
