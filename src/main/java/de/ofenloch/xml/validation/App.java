@@ -25,6 +25,10 @@ import org.xml.sax.XMLReader;
  *
  */
 public class App {
+
+    public static String DATA_DIRECTORY = "./data/";
+    public static String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema/";
+
     public static void main(String[] args) {
 
         // System.out.println("students.xml validates against students.xsd "
@@ -69,7 +73,7 @@ public class App {
             try {
 
                 SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                factory.setResourceResolver(new ResourceResolver());
+                factory.setResourceResolver(new ResourceResolver("./data/OfficeOpenXML-XMLSchema/"));
                 // FEATURE_SECURE_PROCESSING disallows file access
                 // trySetFeature(factory, XMLConstants.FEATURE_SECURE_PROCESSING, true);
                 trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_SCHEMA, true);
@@ -78,11 +82,27 @@ public class App {
 
                 Schema ooxmlSchema = factory.newSchema(new Source[] {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/xml.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
-                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
+                    // xml.xsd refers/loads XMLSchema.dtd and datatypes.dtd
+                    // datatypes.dtd is intended only for incorporation in XMLSchema.dtd
+                    // So we do not load XMLSchema.xsd
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/XMLSchema.xsd")),
+                    
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-documentProperties.xsd")),
+                    new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObject.xsd")),
+
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-bibliography.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlDataProperties.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlSchemaProperties.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesCustom.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesExtended.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesVariantTypes.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-relationshipReference.xsd")),
+
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-audioVideo.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseStylesheet.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-baseTypes.xsd")),
+                    
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-chartDrawing.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-chart.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-compatibility.xsd")),
@@ -93,10 +113,10 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-diagramLayoutVariables.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-diagramStyleDefinition.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-diagramTypes.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-documentProperties.xsd")),
+                    
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObjectAnimation.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObjectFormat.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-graphicalObject.xsd")),
+                    
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-gvml.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-lockedCanvas.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-picture.xsd")),
@@ -133,14 +153,6 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-userDefinedTags.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/pml-viewProperties.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-additionalCharacteristics.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-bibliography.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlDataProperties.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-customXmlSchemaProperties.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesCustom.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesExtended.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-documentPropertiesVariantTypes.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-math.xsd")),
-                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/shared-relationshipReference.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-autoFilter.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-baseTypes.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/sml-calculationChain.xsd")),
@@ -166,6 +178,7 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-presentationDrawing.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-spreadsheetDrawing.xsd")),
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/vml-wordprocessingDrawing.xsd")),
+                    // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
                 File xmlFile = new File("data/word_document.xml");
                 InputStream xmlInStream = new FileInputStream(xmlFile);
