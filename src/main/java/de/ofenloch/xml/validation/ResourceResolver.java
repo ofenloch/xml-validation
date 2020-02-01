@@ -40,6 +40,11 @@ public class ResourceResolver implements LSResourceResolver {
       System.out.println("       namespaceURI: " + namespaceURI);
       System.out.println("           publicId: " + publicId);
       System.out.println("            baseURI: " + baseURI);
+      if (systemId == null) {
+        if (namespaceURI.compareTo("http://www.w3.org/XML/1998/namespace")==0) {
+          systemId = "xml.xsd";
+        }
+      }
       String xsdPath = buildPath(systemId);
       InputStream resourceAsStream = new FileInputStream(xsdPath);
       System.out.println(" ---- found file \"" + xsdPath + "\" ...");
