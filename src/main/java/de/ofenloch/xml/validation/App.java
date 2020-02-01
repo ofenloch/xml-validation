@@ -76,9 +76,10 @@ public class App {
                 factory.setResourceResolver(new ResourceResolver("./data/OfficeOpenXML-XMLSchema/"));
                 // FEATURE_SECURE_PROCESSING disallows file access
                 // trySetFeature(factory, XMLConstants.FEATURE_SECURE_PROCESSING, true);
-                trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_SCHEMA, true);
-                trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_DTD, true);
-                trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, true);
+                // TODO: It seems, none of the features is working ...
+                // trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_SCHEMA, true);
+                // trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_DTD, true);
+                // trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, true);
 
                 Schema ooxmlSchema = factory.newSchema(new Source[] {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/xml.xsd")),
