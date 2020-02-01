@@ -12,6 +12,39 @@ validate OOXML files. I took them from the Apache POI project ...
 Some of the xsd files from MicroSoft have to be converted to UTF-8. Otherwise 
 we get 'content in prolog' errors.
 
+## Fixing the XSD Files
+
+According to 
+[NevemTeve's post](https://www.linuxquestions.org/questions/programming-9/xml-xsd-schemavalidation-of-an-ooxml-document-4175650279/#post5974992) 
+in [this thread](https://www.linuxquestions.org/questions/programming-9/xml-xsd-schemavalidation-of-an-ooxml-document-4175650279/?nojs=1#goto_threadsearch) 
+on [LinuxQuestions.org](https://www.linuxquestions.org/questions/) **wml.xsd and dml-wordprocessingDrawing.xsd need to be fixed**.
+
+
+wml.xsd -- missing schemaLocation
+
+    -  <xsd:import id="xml" namespace="http://www.w3.org/XML/1998/namespace" />
+    +  <xsd:import id="xml" namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/XML/1998/namespace"/>
+
+dml-wordprocessingDrawing.xsd -- duplicate import for the same namespace
+
+    -  <xsd:import schemaLocation="dml-graphicalObject.xsd"    namespace="http://schemas.openxmlformats.org/drawingml/2006/main" />
+    -  <xsd:import schemaLocation="dml-documentProperties.xsd" namespace="http://schemas.openxmlformats.org/drawingml/2006/main" />
+    +  <xsd:import schemaLocation="dml-wordprocessingDrawing_import.xsd" namespace="http://schemas.openxmlformats.org/drawingml/2006/main" />
+
+Then create this dml-wordprocessingDrawing_import.xsd file:
+
+```xml
+        <?xml version="1.0" encoding="utf-8"?>
+        <xsd:schema targetNamespace="http://schemas.openxmlformats.org/drawingml/2006/main"
+        elementFormDefault="qualified"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:include schemaLocation="dml-graphicalObject.xsd"/>
+        <xsd:include schemaLocation="dml-documentProperties.xsd"/>
+        </xsd:schema>
+```
+
+[The entire thread is saved in this PDF document.](./LinuxQuestions.og_-_XML-XSD-Schemavalidation_of_an_OOXML_document.pdf)
+
 ## Set Up Project with Maven
 
 ```bash
