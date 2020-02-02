@@ -1,29 +1,36 @@
 package de.ofenloch.xml.validation;
 
+import java.io.PrintStream;
+
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class validationErrorHandler implements ErrorHandler {
+    PrintStream out;
+
+    public validationErrorHandler(PrintStream printStream) {
+        this.out = printStream;
+    }
 
     public void warning(SAXParseException e) {
-        System.err.print("WARNING: ");
-        System.out.println("  " + e.getMessage());
-        System.out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
-        System.out.println(" ");
+        out.print("WARNING: ");
+        out.println("  " + e.getMessage());
+        out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
+        out.println(" ");
     }
 
     public void error(SAXParseException e) {
-        System.err.print("ERROR: ");
-        System.out.println("  " + e.getMessage());
-        System.out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
-        System.out.println(" ");
+        out.print("ERROR: ");
+        out.println("  " + e.getMessage());
+        out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
+        out.println(" ");
     }
 
     public void fatalError(SAXParseException e) throws SAXException {
-        System.err.print("FATAL: ");
-        System.out.println("  " + e.getMessage());
-        System.out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
+        out.print("FATAL: ");
+        out.println("  " + e.getMessage());
+        out.println("  line " + e.getLineNumber() + " column " + e.getColumnNumber());
         throw e;
     }
 
