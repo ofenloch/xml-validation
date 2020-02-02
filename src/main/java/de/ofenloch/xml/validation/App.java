@@ -3,8 +3,12 @@ package de.ofenloch.xml.validation;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.Reader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -22,6 +26,7 @@ import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSResourceResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
@@ -193,6 +198,15 @@ public class App {
                 xmlReader.setErrorHandler(new validationErrorHandler());
                 xmlReader.parse(xmlFileName);
 
+                // Of course, we stil could do something like this, if 
+                // want parsing and validating to happen separately:
+                // Path xmlPath = Paths.get(xmlFileName);
+                // Reader reader = Files.newBufferedReader(xmlPath);
+                // Validator validator = ooxmlSchema.newValidator();
+                // validator.setErrorHandler(new validationErrorHandler());
+                // SAXSource source = new SAXSource(new InputSource(reader));
+                // validator.validate(source);
+
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
                 System.out.println("  line     : " + e.getLineNumber());
@@ -201,7 +215,7 @@ public class App {
                 System.out.println("  systemId : " + e.getSystemId());
                 System.out.println("  message : " + e.getMessage());
                 System.out.println("    cause : " + e.getCause());
-                //e.printStackTrace();
+                e.printStackTrace();
             } catch (SAXException e) {
                 System.out.println("Caught SAXException:");
                 System.out.println("  message : " + e.getMessage());
