@@ -1,6 +1,7 @@
 package de.ofenloch.xml.validation;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -17,8 +18,11 @@ public class contentHandler extends DefaultHandler {
     private Hashtable<String, Integer> tags;
     private Hashtable<String, Integer> qnames;
     private HashMap<String, String> namespaces;
+    
+    PrintStream out;
 
-    public contentHandler() {
+    public contentHandler(PrintStream printStream) {
+        this.out = printStream;
         namespaces = new HashMap<String, String>();
         namespaces.put("http://schemas.openxmlformats.org/drawingml/2006/main", "a");
         namespaces.put("http://schemas.openxmlformats.org/drawingml/2006/chart", "c");
@@ -41,13 +45,13 @@ public class contentHandler extends DefaultHandler {
         while (e.hasMoreElements()) {
             String tag = (String) e.nextElement();
             int count = ((Integer) tags.get(tag)).intValue();
-            System.out.println("contentHandler.endDocument: Local Name \"" + tag + "\" occurs " + count + " times");
+            out.println("contentHandler.endDocument: Local Name \"" + tag + "\" occurs " + count + " times");
         }
         Enumeration<String> e2 = qnames.keys();
         while (e2.hasMoreElements()) {
             String qname = (String) e2.nextElement();
             int count = ((Integer) qnames.get(qname)).intValue();
-            System.out.println("contentHandler.endDocument: qName \"" + qname + "\" occurs " + count + " times");
+            out.println("contentHandler.endDocument: qName \"" + qname + "\" occurs " + count + " times");
         }
     }
 
