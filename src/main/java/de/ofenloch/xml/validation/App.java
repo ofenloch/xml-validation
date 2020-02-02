@@ -266,14 +266,18 @@ public class App {
             File xmlFile = new File(xmlFileName);
             PrintStream printStream = new PrintStream(new File(xmlFileName+"validation"), "UTF-8");
             InputStream xmlInStream = new FileInputStream(xmlFile);
+            validationErrorHandler vH = new validationErrorHandler(printStream);
             try {
                 Validator validator = schema.newValidator();
-                validator.setErrorHandler(new validationErrorHandler(printStream));
+                validator.setErrorHandler(vH);
                 InputSource inputSource = new InputSource(xmlInStream);
                 Source saxSource = new SAXSource(inputSource);
                 Result saxResult = new SAXResult();
                 validator.validate(saxSource, saxResult);
-                // no clue what to do with the reuslt ...
+                // no clue what to do with the result ...
+                if (vH.getnFatals()>0) {
+                    return false;
+                }
             }
             catch (SAXException ex) {
                 System.out.println("XML in file " + xmlFileName + " is not valid because ");
