@@ -3,6 +3,7 @@ package de.ofenloch.xml.validation;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.net.URI;
 import java.net.URL;
@@ -25,6 +26,8 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -164,25 +167,17 @@ public class App {
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
 
+                System.out.println("\nCreated ooxmlSchema\n");
+
                 String xmlFileName = "./data/word_document.xml";
 
-                // System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
-                // File xmlFile = new File(xmlFileName);
-                // InputStream xmlInStream = new FileInputStream(xmlFile);
-                // Validator validator = ooxmlSchema.newValidator();
-                // validator.setErrorHandler(new validationErrorHandler());
-                // validator.validate(new StreamSource(xmlInStream));
-                // try {
-                //     Validator validator = ooxmlSchema.newValidator();
-                //     validator.setErrorHandler(new validationErrorHandler());
-                //     validator.validate(new StreamSource(new FileInputStream(new File(xmlFileName))));
-                //     // Document augmented = (Document) result.getNode();
-                //     // do whatever you need to do with the augmented document...
-                // }
-                // catch (SAXException ex) {
-                //     System.out.println(xmlFileName + " is not valid because ");
-                //     System.out.println(ex.getMessage());
-                // }
+                System.out.println("Validating XML in file " + xmlFileName + " ...\n");
+                if (isValid(xmlFileName, ooxmlSchema)) {
+                    System.out.println(" XML is valid\n");
+                } else {
+                    System.out.println(" XML is NOT valid\n");
+                }
+
 
                 System.out.println("\nCreated ooxmlSchema. Going to parse " + xmlFileName + " (with validation!) ...\n");
                 SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -194,8 +189,8 @@ public class App {
                 // saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
 
                 XMLReader xmlReader = saxParser.getXMLReader();
-                xmlReader.setContentHandler(new contentHandler());
-                xmlReader.setErrorHandler(new validationErrorHandler());
+                //xmlReader.setContentHandler(new contentHandler());
+                //xmlReader.setErrorHandler(new validationErrorHandler());
                 xmlReader.parse(xmlFileName);
 
                 // Of course, we still could do something like this, if 
@@ -207,6 +202,15 @@ public class App {
                 // SAXSource source = new SAXSource(new InputSource(reader));
                 // validator.validate(source);
 
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Path xmlPath = Paths.get(xmlFileName);
+                Document xmlDocument = dBuilder.parse(xmlPath.toFile());
+                Element xmlDocumentDocumentElement = xmlDocument.getDocumentElement();
+                xmlDocumentDocumentElement.normalize();
+                System.out.println("Root element :" + xmlDocument.getDocumentElement().getNodeName());
+                NodeList nodeList = xmlDocument.getElementsByTagName("student");
+                
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
                 System.out.println("  line     : " + e.getLineNumber());
@@ -244,6 +248,40 @@ public class App {
             System.out.println("SchemaFactory: Feature \"" + feature + "\" unsupported : " + e);
         } catch (AbstractMethodError ame) {
             System.out.println("SchemaFactory: Cannot set Feature \"" + feature + "\" because outdated XML parser in classpath : " + ame);
+        }
+    }
+
+    /**
+     * validate xml in given file against given Schema
+     * 
+     * @param xmlFileName the name of the file to be validated
+     * @param schema the Schema to validate against
+     * @return return true if valid, false otherwise
+     */
+    static public boolean isValid(final String xmlFileName, Schema schema) {
+        try {
+            System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
+            File xmlFile = new File(xmlFileName);
+            PrintStream printStream = new PrintStream(new File(xmlFileName+"validation"), "UTF-8");
+            InputStream xmlInStream = new FileInputStream(xmlFile);
+            try {
+                Validator validator = schema.newValidator();
+                validator.setErrorHandler(new validationErrorHandler(printStream));
+                validator.validate(new StreamSource(xmlInStream));
+                // Document augmented = (Document) result.getNode();
+                // do whatever you need to do with the augmented document...
+            }
+            catch (SAXException ex) {
+                System.out.println("XML in file " + xmlFileName + " is not valid because ");
+                System.out.println(ex.getMessage());
+                return false;
+            }
+            printStream.close();
+            return true;
+        } catch (Exception ex) {
+            System.out.println("Could not validate file " + xmlFileName + " because ");
+            System.out.println(ex.getMessage());
+            return false;
         }
     }
 }
