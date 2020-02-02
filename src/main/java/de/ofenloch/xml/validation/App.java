@@ -198,7 +198,7 @@ public class App {
                 xmlReader.setErrorHandler(new validationErrorHandler());
                 xmlReader.parse(xmlFileName);
 
-                // Of course, we stil could do something like this, if 
+                // Of course, we still could do something like this, if 
                 // want parsing and validating to happen separately:
                 // Path xmlPath = Paths.get(xmlFileName);
                 // Reader reader = Files.newBufferedReader(xmlPath);
