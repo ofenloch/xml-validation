@@ -7,14 +7,20 @@ import java.net.URI;
 import java.net.URL;
 
 import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -26,8 +32,13 @@ import org.xml.sax.XMLReader;
  */
 public class App {
 
-    public static String DATA_DIRECTORY = "./data/";
-    public static String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema/";
+    static final String DATA_DIRECTORY = "./data/";
+    static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema/";
+
+    static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
+    static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
+    static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
+
 
     public static void main(String[] args) {
 
@@ -150,14 +161,37 @@ public class App {
 
                 String xmlFileName = "./data/word_document.xml";
 
-                System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
-                File xmlFile = new File(xmlFileName);
-                InputStream xmlInStream = new FileInputStream(xmlFile);
-                Validator validator = ooxmlSchema.newValidator();
-                validator.setErrorHandler(new validationErrorHandler());
-                validator.validate(new StreamSource(xmlInStream));
+                // System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
+                // File xmlFile = new File(xmlFileName);
+                // InputStream xmlInStream = new FileInputStream(xmlFile);
+                // Validator validator = ooxmlSchema.newValidator();
+                // validator.setErrorHandler(new validationErrorHandler());
+                // validator.validate(new StreamSource(xmlInStream));
+                // try {
+                //     Validator validator = ooxmlSchema.newValidator();
+                //     validator.setErrorHandler(new validationErrorHandler());
+                //     validator.validate(new StreamSource(new FileInputStream(new File(xmlFileName))));
+                //     // Document augmented = (Document) result.getNode();
+                //     // do whatever you need to do with the augmented document...
+                // }
+                // catch (SAXException ex) {
+                //     System.out.println(xmlFileName + " is not valid because ");
+                //     System.out.println(ex.getMessage());
+                // }
 
+                System.out.println("\nCreated ooxmlSchema. Going to parse " + xmlFileName + " (with validation!) ...\n");
+                SAXParserFactory spf = SAXParserFactory.newInstance();
+                // always use namespace awarenes
+                spf.setNamespaceAware(true);
+                spf.setSchema(ooxmlSchema);
+                SAXParser saxParser = spf.newSAXParser();
+                // Property 'http://java.sun.com/xml/jaxp/properties/schemaLanguage' cannot be set when a non-null Schema object has already been specified.
+                // saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
 
+                XMLReader xmlReader = saxParser.getXMLReader();
+                xmlReader.setContentHandler(new contentHandler());
+                xmlReader.setErrorHandler(new validationErrorHandler());
+                xmlReader.parse(xmlFileName);
 
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
