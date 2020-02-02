@@ -147,12 +147,18 @@ public class App {
                     // new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/dml-compatibility.xsd")),
                     new StreamSource(new FileInputStream("./data/OfficeOpenXML-XMLSchema/wml.xsd")),
                 });
-                System.out.println("\nCreated ooxmlSchema. Going to validate ./data/word_document.xml ...\n");
-                File xmlFile = new File("./data/word_document.xml");
+
+                String xmlFileName = "./data/word_document.xml";
+
+                System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
+                File xmlFile = new File(xmlFileName);
                 InputStream xmlInStream = new FileInputStream(xmlFile);
                 Validator validator = ooxmlSchema.newValidator();
                 validator.setErrorHandler(new validationErrorHandler());
                 validator.validate(new StreamSource(xmlInStream));
+
+
+
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
                 System.out.println("  line     : " + e.getLineNumber());
