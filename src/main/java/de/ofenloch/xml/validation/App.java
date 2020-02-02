@@ -16,9 +16,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -267,9 +269,11 @@ public class App {
             try {
                 Validator validator = schema.newValidator();
                 validator.setErrorHandler(new validationErrorHandler(printStream));
-                validator.validate(new StreamSource(xmlInStream));
-                // Document augmented = (Document) result.getNode();
-                // do whatever you need to do with the augmented document...
+                InputSource inputSource = new InputSource(xmlInStream);
+                Source saxSource = new SAXSource(inputSource);
+                Result saxResult = new SAXResult();
+                validator.validate(saxSource, saxResult);
+                // no clue what to do with the reuslt ...
             }
             catch (SAXException ex) {
                 System.out.println("XML in file " + xmlFileName + " is not valid because ");
