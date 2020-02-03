@@ -29,6 +29,7 @@ import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.InputSource;
@@ -94,27 +95,19 @@ public class App {
                 } else {
                     System.out.println(" XML is NOT valid\n");
                 }
-
-                System.out.println("\nCreated ooxmlSchema. Going to parse " + xmlFileName + " (with validation!) ...\n");
-                SAXParserFactory spf = SAXParserFactory.newInstance();
-                // always use namespace awarenes
-                spf.setNamespaceAware(true);
-                spf.setSchema(ooxmlSchema);
-                SAXParser saxParser = spf.newSAXParser();
-                // Property 'http://java.sun.com/xml/jaxp/properties/schemaLanguage' cannot be set when a non-null Schema object has already been specified.
-                // saxParser.setProperty(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
-
-                XMLReader xmlReader = saxParser.getXMLReader();
-                //xmlReader.setContentHandler(new contentHandler());
-                //xmlReader.setErrorHandler(new validationErrorHandler());
-                xmlReader.parse(xmlFileName);
 */
 
+                System.out.println("\nCreated ooxmlSchema. Going to parse " + xmlFileName + " (with validation!) ...\n");
                 Document xmlDocument = parseXmlFile(xmlFileName, ooxmlSchema);
                 Element xmlDocumentDocumentElement = xmlDocument.getDocumentElement();
                 xmlDocumentDocumentElement.normalize();
-                System.out.println("Root element :" + xmlDocument.getDocumentElement().getNodeName());
-                NodeList nodeList = xmlDocument.getElementsByTagName("student");
+                System.out.println("Root element :" + xmlDocumentDocumentElement.getNodeName());
+                NodeList bodyElements = xmlDocument.getElementsByTagName("w:body");
+                int nBodyElements = bodyElements.getLength();
+                if (nBodyElements != 1) {
+                    System.out.println("Document contains " + nBodyElements + " <w:body> elements. Aborting.");
+                }
+                Node documentBody = bodyElements.item(0);
                 
             } catch (SAXParseException e) {
                 System.out.println("Caught SAXParseException:");
@@ -165,7 +158,6 @@ public class App {
      */
     static public boolean isValid(final String xmlFileName, Schema schema) {
         try {
-            System.out.println("\nCreated ooxmlSchema. Going to validate " + xmlFileName + " ...\n");
             File xmlFile = new File(xmlFileName);
             PrintStream printStream = new PrintStream(new File(xmlFileName+"validation"), "UTF-8");
             InputStream xmlInStream = new FileInputStream(xmlFile);
@@ -199,6 +191,7 @@ public class App {
 
     /**
      * parse given XML file and validate it against the given schema
+     * (if no schema is given, no validation is done)
      * 
      * @param xmlFileName the XML file's name
      * @param schema the schema (may be null if no validation is desired)
