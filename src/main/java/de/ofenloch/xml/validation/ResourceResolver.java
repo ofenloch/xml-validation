@@ -21,7 +21,8 @@ public class ResourceResolver implements LSResourceResolver {
   }
 
   /**
-   * this is an improvment of the original resolveResource that uses its own implementation of LSInput in class Input
+   * this is an improvment of the original resolveResource that uses its own
+   * implementation of LSInput in class Input
    * 
    * class Input is not needed any more if we use this version
    * 
@@ -40,12 +41,21 @@ public class ResourceResolver implements LSResourceResolver {
       System.out.println("       namespaceURI: " + namespaceURI);
       System.out.println("           publicId: " + publicId);
       System.out.println("            baseURI: " + baseURI);
+      String xsdPath = "";
       if (systemId == null) {
-        if (namespaceURI.compareTo("http://www.w3.org/XML/1998/namespace")==0) {
-          systemId = "xml.xsd";
+        // no systemId given
+        if (namespaceURI.compareTo("http://www.w3.org/XML/1998/namespace") == 0) {
+          xsdPath = "./data/schemas/2001/xml.xsd";
         }
+      } else if (systemId.compareTo("XMLSchema.dtd") == 0) {
+        xsdPath = "./data/schemas/2001/XMLSchema.dtd";
+      } else if (systemId.compareTo("datatypes.dtd") == 0) {
+        xsdPath = "./data/schemas/2001/datatypes.dtd";
+      } else if (systemId.compareTo("http://www.w3.org/2001/xml.xsd") == 0) {
+        xsdPath = "./data/schemas/2001/xml.xsd";
+      } else {
+        xsdPath = buildPath(systemId);
       }
-      String xsdPath = buildPath(systemId);
       InputStream resourceAsStream = new FileInputStream(xsdPath);
       System.out.println(" ---- found file \"" + xsdPath + "\" ...");
       Objects.requireNonNull(resourceAsStream, String.format("Could not find the specified xsd file: %s", systemId));
