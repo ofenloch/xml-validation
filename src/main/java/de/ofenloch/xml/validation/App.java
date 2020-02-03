@@ -52,8 +52,8 @@ public class App {
     //  and 5th edition (Part 3, December 2015; and Parts 1 & 4, December 2016)
     //
     //static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema";
-    static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema-Transitional-4thEd";
-    //static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema-Transitional-5thEd";
+    //static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema-Transitional-4thEd";
+    static final String XSD_DIRECTORY = "./data/OfficeOpenXML-XMLSchema-Transitional-5thEd";
 
     static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
     static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
@@ -77,103 +77,10 @@ public class App {
                 // trySetFeature(factory, XMLConstants.ACCESS_EXTERNAL_STYLESHEET, true);
 
                 Schema ooxmlSchema = factory.newSchema(new Source[] {
-                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/xml.xsd")),
-                    // xml.xsd refers/loads XMLSchema.dtd and datatypes.dtd
-                    // datatypes.dtd is intended only for incorporation in XMLSchema.dtd
-                    // So we do not load XMLSchema.xsd
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/XMLSchema.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-baseTypes.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-baseTypes.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-baseTypes.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-bibliography.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-customXmlDataProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-customXmlSchemaProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-documentPropertiesCustom.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-documentPropertiesExtended.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-documentPropertiesVariantTypes.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-relationshipReference.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-additionalCharacteristics.xsd")),
-
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-documentProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-graphicalObject.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-audioVideo.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-baseStylesheet.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramColorTransform.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramDataModel.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramDefinition.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramElementPropertySet.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramLayoutVariables.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramStyleDefinition.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-diagramTypes.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-graphicalObjectAnimation.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-graphicalObjectFormat.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-gvml.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shape3DCamera.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shape3DLighting.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shape3DScenePlane.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shape3DScene.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shape3DStyles.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeEffects.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeGeometry.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeLineProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeMiscellaneous.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-shapeStyle.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-styleDefaults.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-stylesheet.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-tableStyle.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-table.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-textBullet.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-textCharacter.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-textParagraph.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-textRun.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-text.xsd")),
-                    
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-comments.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-embedding.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-presentationProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-presentation.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-slideSynchronizationData.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-slide.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-userDefinedTags.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-viewProperties.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-autoFilter.xsd")),
-                    
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-calculationChain.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-comments.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-customXmlMappings.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-externalConnections.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-pivotTableShared.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-pivotTable.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-queryTable.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-sharedStringTable.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-sharedWorkbookRevisions.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-sharedWorkbookUserNames.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-sheetMetadata.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-sheet.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-singleCellTable.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-styles.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-supplementaryWorkbooks.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-table.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-volatileDependencies.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml-workbook.xsd")),
-
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/vml-presentationDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/vml-spreadsheetDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/vml-wordprocessingDrawing.xsd")),
-
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/shared-math.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-lockedCanvas.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-picture.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/vml-main.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/vml-officeDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-spreadsheetDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-wordprocessingDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml-animationInfo.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-chartDrawing.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-chart.xsd")),
-                    // new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-compatibility.xsd")),
-                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/wml.xsd")),
+                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/dml-main.xsd")),
+                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/pml.xsd")),
+                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/sml.xsd")),
+                    new StreamSource(new FileInputStream(XSD_DIRECTORY + "/wml.xsd"))
                 });
 
                 System.out.println("\nCreated ooxmlSchema\n");
