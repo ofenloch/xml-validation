@@ -5,20 +5,22 @@ JAVACLASS="xsdfiles"
 FILENAME=${JAVACLASS}.java
 
 XSDDIRECTORY="./data/schemas/2001"
-
 mkdir -p ${XSDDIRECTORY}
 
+# XML Schema 1.0
 curl https://www.w3.org/2001/03/xml.xsd  > ${XSDDIRECTORY}/xml.xsd
-## curl http://www.w3.org/2009/XMLSchema/XMLSchema.dtd > ${XSDDIRECTORY}/XMLSchema.dtd
 curl http://www.w3.org/2001/XMLSchema.dtd > ${XSDDIRECTORY}/XMLSchema.dtd
-## curl http://www.w3.org/2009/XMLSchema/datatypes.dtd > ${XSDDIRECTORY}/datatypes.dtd
 curl http://www.w3.org/2001/datatypes.dtd > ${XSDDIRECTORY}/datatypes.dtd
-## curl http://www.w3.org/2009/XMLSchema/XMLSchema.xsd > ${XSDDIRECTORY}/XMLSchema.xsd
 curl http://www.w3.org/2001/XMLSchema.xsd > ${XSDDIRECTORY}/XMLSchema.xsd
 
+XSDDIRECTORY="./data/schemas/2009"
+mkdir -p ${XSDDIRECTORY}
 
-
-
+# XML Schema 1.1
+curl https://www.w3.org/2001/03/xml.xsd  > ${XSDDIRECTORY}/xml.xsd
+curl http://www.w3.org/2009/XMLSchema/XMLSchema.dtd > ${XSDDIRECTORY}/XMLSchema.dtd
+curl http://www.w3.org/2009/XMLSchema/datatypes.dtd > ${XSDDIRECTORY}/datatypes.dtd
+curl http://www.w3.org/2009/XMLSchema/XMLSchema.xsd > ${XSDDIRECTORY}/XMLSchema.xsd
 
 
 
