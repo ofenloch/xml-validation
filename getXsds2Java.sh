@@ -4,10 +4,11 @@
 JAVACLASS="xsdfiles"
 FILENAME=${JAVACLASS}.java
 
-XSDDIRECTORY="./data/OfficeOpenXML-XMLSchema"
+XSDDIRECTORY="./data/schemas/2001"
 
 mkdir -p ${XSDDIRECTORY}
 
+curl https://www.w3.org/2001/03/xml.xsd  > ${XSDDIRECTORY}/xml.xsd
 ## curl http://www.w3.org/2009/XMLSchema/XMLSchema.dtd > ${XSDDIRECTORY}/XMLSchema.dtd
 curl http://www.w3.org/2001/XMLSchema.dtd > ${XSDDIRECTORY}/XMLSchema.dtd
 ## curl http://www.w3.org/2009/XMLSchema/datatypes.dtd > ${XSDDIRECTORY}/datatypes.dtd
