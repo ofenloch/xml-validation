@@ -52,9 +52,6 @@ public class App {
 
     public static void main(String[] args) {
 
-        // System.out.println("students.xml validates against students.xsd "
-        //         + xmlvalidator.validateAgainstXSD("./data/students.xml", "./data/students.xsd"));
-
         try {
 
             // Try to validate a /word/document.xml from an extracted docx file
@@ -173,13 +170,13 @@ public class App {
 
                 String xmlFileName = "./data/word_document.xml";
 
+/*
                 System.out.println("Validating XML in file " + xmlFileName + " ...\n");
                 if (isValid(xmlFileName, ooxmlSchema)) {
                     System.out.println(" XML is valid\n");
                 } else {
                     System.out.println(" XML is NOT valid\n");
                 }
-
 
                 System.out.println("\nCreated ooxmlSchema. Going to parse " + xmlFileName + " (with validation!) ...\n");
                 SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -194,20 +191,9 @@ public class App {
                 //xmlReader.setContentHandler(new contentHandler());
                 //xmlReader.setErrorHandler(new validationErrorHandler());
                 xmlReader.parse(xmlFileName);
+*/
 
-                // Of course, we still could do something like this, if 
-                // want parsing and validating to happen separately:
-                // Path xmlPath = Paths.get(xmlFileName);
-                // Reader reader = Files.newBufferedReader(xmlPath);
-                // Validator validator = ooxmlSchema.newValidator();
-                // validator.setErrorHandler(new validationErrorHandler());
-                // SAXSource source = new SAXSource(new InputSource(reader));
-                // validator.validate(source);
-
-                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                Path xmlPath = Paths.get(xmlFileName);
-                Document xmlDocument = dBuilder.parse(xmlPath.toFile());
+                Document xmlDocument = parseXmlFile(xmlFileName, ooxmlSchema);
                 Element xmlDocumentDocumentElement = xmlDocument.getDocumentElement();
                 xmlDocumentDocumentElement.normalize();
                 System.out.println("Root element :" + xmlDocument.getDocumentElement().getNodeName());
@@ -251,7 +237,7 @@ public class App {
         } catch (AbstractMethodError ame) {
             System.out.println("SchemaFactory: Cannot set Feature \"" + feature + "\" because outdated XML parser in classpath : " + ame);
         }
-    }
+    } // public static void trySetFeature(SchemaFactory sf, String feature, boolean enabled)
 
     /**
      * validate xml in given file against given Schema
@@ -291,5 +277,59 @@ public class App {
             System.out.println(ex.getMessage());
             return false;
         }
+    } // static public boolean isValid(final String xmlFileName, Schema schema)
+
+
+    /**
+     * parse given XML file and validate it against the given schema
+     * 
+     * @param xmlFileName the XML file's name
+     * @param schema the schema (may be null if no validation is desired)
+     * @return the parsed document (null if there was an parsing error)
+     */
+    static public Document parseXmlFile(final String xmlFileName, Schema schema) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            dbFactory.setNamespaceAware(true);
+            if (schema != null) {
+                dbFactory.setSchema(schema);
+                dbFactory.setValidating(true);
+            } else {
+                dbFactory.setValidating(false);
+            }
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            PrintStream printStream = new PrintStream(new File(xmlFileName+"validation"), "UTF-8");
+            validationErrorHandler vH = new validationErrorHandler(printStream);
+            dBuilder.setErrorHandler(vH);
+            Path xmlPath = Paths.get(xmlFileName);
+            Document xmlDocument = dBuilder.parse(xmlPath.toFile());
+            if (schema != null) {
+                if (vH.getnFatals()>0) {
+                    System.out.println("Got " + vH.getnFatals() + " fatal errors while parsing and validating file " + xmlFileName);
+                    return null;
+                }
+                if (vH.getnErrors()>0) {
+                    System.out.println("Got " + vH.getnErrors() + " recoverable errors while parsing and validating file " + xmlFileName);
+                }
+                if (vH.getnWarnings()>0) {
+                    System.out.println("Got " + vH.getnWarnings() + " recoverable errors while parsing and validating file " + xmlFileName);
+                }
+            }
+            return xmlDocument;
+        } catch (SAXParseException ex) {
+            printSaxParseException(ex);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    } // static public Document parseXmlFile(final String xmlFileName, Schema schema)
+
+    public static void printSaxParseException(SAXParseException ex) {
+        printSaxParseException(ex, System.out);
+    }
+    public static void printSaxParseException(SAXParseException ex, PrintStream printStream) {
+        printStream.println("line " + ex.getLineNumber() + ", column " + ex.getColumnNumber());
+        printStream.println(ex.getMessage());
     }
 }
